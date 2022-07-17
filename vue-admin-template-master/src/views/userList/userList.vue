@@ -43,11 +43,11 @@
       label="编辑">
       <template slot-scope="{row,$index}">
         <!-- 禁言状态 -->
-        <el-button type="danger" icon="el-icon-turn-off-microphone" size="mini" v-show="row.bio!=1" @click="changeState(row)"></el-button>
+        <el-button type="danger" icon="el-icon-turn-off-microphone" size="mini" v-if="row.bio!=1" @click="changeState(row)"></el-button>
         <!-- 非禁言状态 -->
-        <el-button icon="el-icon-turn-off-microphone" size="mini" v-show="row.bio == 1" @click="changeState(row)"></el-button>
+        <el-button icon="el-icon-turn-off-microphone" size="mini" v-if="row.bio == 1" @click="changeState(row)"></el-button>
         <!-- 功能未知 -->
-        <el-button type="primary" icon="el-icon-reading" size="mini" @click=""></el-button>
+        <!-- <el-button type="primary" icon="el-icon-reading" size="mini" @click=""></el-button> -->
       </template>
     </el-table-column>
 
@@ -90,11 +90,11 @@
       label="编辑">
       <template slot-scope="{row,$index}">
         <!-- 禁言状态 -->
-        <el-button type="danger" icon="el-icon-turn-off-microphone" size="mini" v-show="row.bio!=1" @click="changeState(row)"></el-button>
+        <el-button type="danger" icon="el-icon-turn-off-microphone" size="mini" v-if="row.bio!=1" @click="searchChangeState(row)"></el-button>
         <!-- 非禁言状态 -->
-        <el-button icon="el-icon-turn-off-microphone" size="mini" v-show="row.bio == 1" @click="changeState(row)"></el-button>
+        <el-button icon="el-icon-turn-off-microphone" size="mini" v-if="row.bio == 1" @click="searchChangeState(row)"></el-button>
         <!-- 功能未知 -->
-        <el-button type="primary" icon="el-icon-reading" size="mini" @click=""></el-button>
+        <!-- <el-button type="primary" icon="el-icon-reading" size="mini" @click=""></el-button> -->
       </template>
     </el-table-column>
 
@@ -121,6 +121,31 @@
 
 
     methods: {
+
+      //改变搜索到的用户状态
+      async searchChangeState(row){
+        // 1代表权限正常  2代表禁言
+        console.log(row);
+        const _id = row._id
+        const data = {}
+        data._id = row._id
+        if(row.bio == 1){
+          data.bio = 2
+          this.$message({
+            message: "用户已禁言",
+            type: 'warning'
+          })
+        }else{
+          data.bio = 1
+          this.$message({
+            message: "用户已解除禁言",
+            type: 'success'
+          })
+        }
+        await this.$store.dispatch('changeState',data)
+        await this.searchUser()
+      },
+
       //改变用户状态
       async changeState(row){
         // 1代表权限正常  2代表禁言

@@ -87,14 +87,14 @@ export default {
             data.limit = this.limit
             data.offset = this.offset
             await this.$store.dispatch('searchPostList',data);
-            this.isSearch = false
+            this.isSearch = false;
             this.rootGetPostdata()
         },
 
         //向vuex获取搜索到的数据
         async rootGetPostdata(){
-            this.searchPostList = await this.$store.state.post.searchPostList
-            this.total = await this.$store.state.post.searchCount
+            this.searchPostList = await this.$store.state.post.searchPostList;
+            this.total = await this.$store.state.post.searchCount;
         },
 
         //关闭搜索
@@ -123,7 +123,7 @@ export default {
               message: '帖子删除成功',
               type:'success'
             })
-            this.searchPost()
+            this.getPostList()
         }
     }
 }

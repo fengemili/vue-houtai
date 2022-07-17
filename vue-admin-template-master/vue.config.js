@@ -24,9 +24,9 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/',
-  outputDir: 'dist',
-  assetsDir: 'static',
+  publicPath: './',
+  outputDir: 'dist1',
+  assetsDir: '../dist1/static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
@@ -39,13 +39,13 @@ module.exports = {
     proxy: {
       "/api": {
         target: "http://192.168.31.18",
-        pathRewrite: {"^/api" : ""}
+        pathRewrite: { "^/api": "" }
       }
     },
-    
+
     // before: require('./mock/mock-server.js')
   },
-  lintOnSave:false,
+  lintOnSave: false,
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
@@ -96,7 +96,7 @@ module.exports = {
             .plugin('ScriptExtHtmlWebpackPlugin')
             .after('html')
             .use('script-ext-html-webpack-plugin', [{
-            // `runtime` must same as runtimeChunk name. default is `runtime`
+              // `runtime` must same as runtimeChunk name. default is `runtime`
               inline: /runtime\..*\.js$/
             }])
             .end()

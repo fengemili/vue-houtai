@@ -102,19 +102,6 @@ export const constantRoutes = [
   ]
   },
 
-  {
-    path: '/mine',
-    component: Layout,
-    redirect: '/mine/mine',
-    children:[
-      {
-        path: 'mine',
-        name: 'Mine',
-        component: () => import('@/views/mine/mine'),
-        meta: { title: '我的', icon: 'el-icon-user-solid'}
-      }
-  ]
-  },
 
   // {
   //   path: '/form',
